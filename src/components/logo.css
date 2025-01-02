@@ -1,0 +1,38 @@
+/* 
+=========================== 
+# Logo 
+=========================== 
+*/
+
+.logo {
+    line-height: 1;
+}
+
+@media (min-width: 1200px) {
+    .logo {
+        width: 280px;
+    }
+}
+
+.logo img {
+    max-height: 26px;
+    margin-right: 6px;
+}
+
+.logo span {
+    font-size: 26px;
+    font-weight: 700;
+    color: #015CF8;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Adding margin to move the toggle icon closer */
+.close-to-logo {
+    margin-left: -35px; /* You can adjust this value as needed to move it 1 cm */
+}
+
+.logo-img {
+    width: 30px; /* Adjust the size of the logo image */
+    height: auto;
+    margin-right: 10px; /* Space between logo and text */
+}
