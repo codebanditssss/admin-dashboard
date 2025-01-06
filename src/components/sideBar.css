@@ -1,7 +1,7 @@
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 60px;
+  top: 0; /* Adjusted to remove space above the sidebar */
   left: 0;
   bottom: 0;
   width: 300px;
@@ -13,6 +13,14 @@
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
+}
+
+.skill-sync {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px; /* Adjusted to add space between skill-sync and overview */
+  text-decoration: none; /* Remove underline */
 }
 
 @media (max-width: 1199px) {
@@ -151,6 +159,7 @@
 .sidebar-nav .nav-content a i.remixicon-line-chart-line {
   font-size: 16px;
   color: #4154f1; /* Line chart icon color */
+  font-size: 16px;
 }
 
 .sidebar-nav .nav-content a i.remixicon-remix {
@@ -160,14 +169,24 @@
 
 .sidebar-nav .nav-content a i.bi-pie-chart,
 .sidebar-nav .nav-content a i.bi-bar-chart {
-  font-size: 16px;
   color: #4154f1; /* Chart icon color */
 }
 
-.sidebar .sidebar-nav .help-settings {
-    margin-top: auto;  /* This pushes these items to the bottom of the sidebar */
-  }
-  
-  .sidebar .sidebar-nav .help-settings li {
-    margin-top: 20px; /* Adds space between the main content and these items */
-  }
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-top {
+  flex-grow: 1;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}

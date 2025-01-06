@@ -1,4 +1,8 @@
 /* Header Navigation Styles */
+.header-nav {
+  margin-top: 20px; /* Add margin to move it below */
+  padding: 0 20px; /* Add padding to prevent touching the screen borders */
+}
 .header-nav ul {
     list-style: none;
   }
