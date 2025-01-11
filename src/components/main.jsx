@@ -1,6 +1,7 @@
 import React from "react";
 import { FaBell, FaFire, FaTrophy, FaGraduationCap, FaGlobe, FaCalendarAlt, FaExclamationCircle, FaArrowRight } from "react-icons/fa";
 import "./main.css";
+import RocketImage from "../images/rocket.svg";
 
 const Dashboard = () => {
   return (
@@ -24,10 +25,10 @@ const Dashboard = () => {
         {/* Stats Section */}
         <div className="flex justify-between mt-6">
         {[
-            { icon: <FaFire className="text-blue-600 text-3xl" />, value: 24, label: "Learning Streak", bgColor: "bg-blue-100" },
-            { icon: <FaTrophy className="text-green-600 text-3xl" />, value: 5, label: "Skills in Progress", bgColor: "bg-green-100" },
-            { icon: <FaGraduationCap className="text-purple-600 text-3xl" />, value: 3, label: "Certifications", bgColor: "bg-purple-100" },
-            { icon: <FaGlobe className="text-yellow-600 text-3xl" />, value: 86, label: "Career Score", bgColor: "bg-yellow-100" },
+            { icon: <FaFire className="text-blue-600 text-3xl" />, value: 5, label: "Learning Streak", bgColor: "bg-green-100" },
+            { icon: <FaTrophy className="text-blue-600 text-3xl" />, value: 5, label: "Skills in Progress", bgColor: "bg-green-100" },
+            { icon: <FaGraduationCap className="text-blue-600 text-3xl" />, value: 3, label: "Certifications", bgColor: "bg-purple-100" },
+            { icon: <FaGlobe className="text-blue-600 text-3xl" />, value: 86, label: "Career Score", bgColor: "bg-yellow-100" },
         ].map((stat, index) => (
             <div key={index} className={`flex items-center p-6 rounded-lg shadow-md ${stat.bgColor} w-1/4`}>
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white">

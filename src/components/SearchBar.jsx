@@ -14,6 +14,7 @@ function SearchBar() {
                     name="query"
                     placeholder="Search"
                     title="Enter search keyword"
+                    
                 />
                 <button type="submit" title="Search">
                     <i className="bi bi-search"></i>
