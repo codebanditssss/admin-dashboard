@@ -211,7 +211,7 @@ const Dashboard = () => {
                   <h3 className="text-sm font-medium">Digital Marketer</h3>
                   <div className="flex flex-col space-x-0">
                     <p className="text-gray-500 text-xs">KPMG</p>
-                    <div className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-md ">72% Ready</div>
+                    <div className="bg-blue-100 text-blue-800 text-xs px-1 py-0.5 rounded-md ">72% Ready</div>
                   </div>
                 </div>
                 <div className="flex flex-col text-xs">
