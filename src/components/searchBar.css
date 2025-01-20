@@ -2,11 +2,6 @@
     min-width: 360px;
     padding: 0 20px;
 }
-
-
-
-
-
 @media (max-width: 1199px) {
     .header .search-bar {
         position: fixed;
