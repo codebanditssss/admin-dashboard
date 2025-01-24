@@ -52,7 +52,7 @@ const Dashboard = () => {
             <div className="mb-4">
               <div className="flex items-center space-x-2 mb-1">
                 <FiPlayCircle className="text-blue-500 text-lg" />
-                <h3 className="text-sm font-medium">Advances Digital Marketing</h3>
+                <h3 className="text-sm font-medium">Advanced Digital Marketing</h3>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mb-1">
                 <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: "78%" }}></div>

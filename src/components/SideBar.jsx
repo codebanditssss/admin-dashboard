@@ -3,6 +3,7 @@ import './sideBar.css';
 import Logo from './Logo';
 import navList from '../data/navItem';
 import NavItem from './NavItem';
+import { Link } from 'react-router-dom';
 
 function SideBar() {
   return (
@@ -24,28 +25,28 @@ function SideBar() {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link to="/training" className="nav-link">
               <i className="bi bi-play-btn"></i>
               <span>Training Modules</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link to="/assessment" className="nav-link">
               <i className="bi bi-list-check"></i>
               <span>Skill Assessment</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link to="/jobs" className="nav-link">
               <i className="bi bi-briefcase"></i>
               <span>Job Matches</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">
+            <Link to="/applications" className="nav-link">
               <i className="bi bi-file-text"></i>
               <span>My Applications</span>
-            </a>
+            </Link>
           </li>
         </div>
 
@@ -53,18 +54,18 @@ function SideBar() {
         <div className="sidebar-bottom">
           {/* Help */}
           <li className="nav-item mt-auto">
-            <a className="nav-link" href="#">
+            <Link to="/help" className="nav-link">
               <i className="bi bi-question-circle"></i>
               <span>Help</span>
-            </a>
+            </Link>
           </li>
 
           {/* Settings */}
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link to="/settings" className="nav-link">
               <i className="bi bi-gear"></i>
               <span>Settings</span>
-            </a>
+            </Link>
           </li>
         </div>
       </ul>
