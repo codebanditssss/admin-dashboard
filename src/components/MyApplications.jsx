@@ -89,7 +89,7 @@ const MyApplications = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" }}>
+    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" , paddingTop: "44px"}}>
       <div className="max-w-7xl mx-auto p-6">
         {/* Header with Interactive Timeline */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">

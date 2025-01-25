@@ -35,7 +35,7 @@ const HelpCenter = () => {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" }}>
+    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" , paddingTop: "44px"}}>
       <div className="max-w-7xl mx-auto p-6">
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 mb-8 text-white">

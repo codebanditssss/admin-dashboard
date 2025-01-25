@@ -14,7 +14,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="bg-gray-100 text-gray-800 min-h-screen" style={{ marginLeft: "7.9cm" }}>
+    <div className="bg-gray-100 text-gray-800 min-h-screen" style={{ marginLeft: "7.9cm", paddingTop: "44px" }}>
       <div className="max-w-7xl mx-auto p-6">
         <div className="mb-6">
           <h1 className="text-xl font-medium mb-1">

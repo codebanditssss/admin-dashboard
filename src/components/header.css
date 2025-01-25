@@ -18,3 +18,14 @@
     color: #012970;
   }
   
+  .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 7.9cm; /* Match the margin-left of your content */
+    height: 58px;
+    z-index: 1000;
+    background-color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
