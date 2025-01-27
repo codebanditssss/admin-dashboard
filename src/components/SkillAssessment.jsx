@@ -1,6 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { Trophy, ChevronDown, ChevronUp } from 'lucide-react';
 import Leaderboard from './leaderboard';
+import Score from './Score'; 
+import TestsCompleted from './TestsCompleted';
+import Goals from './Goals';
 
 const SkillAssessment = () => { 
   const assessments = [
@@ -134,25 +137,27 @@ const SkillAssessment = () => {
              
 
             {/* My Score */}
-            <div className="bg-white rounded-lg shadow p-4 mb-4">
+            {/* <div className="bg-white rounded-lg shadow p-4 mb-4">
               <div className="flex items-center justify-between mb-2">
                 <i className="bi bi-globe text-blue-600 text-xl"></i>
                 <span className="text-blue-600 font-semibold text-2xl">742</span>
               </div>
               <h3 className="text-lg font-semibold">My Score</h3>
-            </div>
+            </div> */}
+            <Score />
 
             {/* Tests Completed */}
-            <div className="bg-white rounded-lg shadow p-4 mb-4">
+            {/* <div className="bg-white rounded-lg shadow p-4 mb-4">
               <div className="flex items-center justify-between mb-2">
                 <i className="bi bi-check2-all text-blue-600 text-xl"></i>
                 <span className="text-blue-600 font-semibold text-2xl">12</span>
               </div>
               <h3 className="text-lg font-semibold">Tests Completed</h3>
-            </div>
+            </div> */}
+            <TestsCompleted />
 
             {/* Goals */}
-            <div className="bg-white rounded-lg shadow p-4">
+            {/* <div className="bg-white rounded-lg shadow p-4">
               <h3 className="text-lg font-semibold mb-4">Goals</h3>
               <div className="flex justify-center mb-4">
                 <div className="relative w-32 h-32">
@@ -184,7 +189,8 @@ const SkillAssessment = () => {
                 <p className="text-gray-600 text-sm mb-1">Daily Goal: 7/30 Learning Days</p>
                 <p className="text-gray-600 text-sm">Longest Streak: 21 Days</p>
               </div>
-            </div>
+            </div> */}
+            <Goals />
           </div>
         </div>
       </div>
