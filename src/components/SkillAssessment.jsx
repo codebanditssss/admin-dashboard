@@ -1,11 +1,30 @@
 import React, { useState, useMemo } from 'react';
-import { Trophy, ChevronDown, ChevronUp } from 'lucide-react';
+import { Trophy, ChevronDown, ChevronUp, BookOpen, Target } from 'lucide-react';
 import Leaderboard from './leaderboard';
 import Score from './Score'; 
 import TestsCompleted from './TestsCompleted';
 import Goals from './Goals';
+import BeginnerStart from './BeginnerStart';
 
 const SkillAssessment = () => { 
+  const [showBeginnerStartModal, setShowBeginnerStartModal] = useState(false);
+  const [modalContent, setModalContent] = useState('getting-started');
+
+  const handleStartClick = (index) => {
+    if (index === 0) {
+      setShowBeginnerStartModal(true);
+      setModalContent('getting-started');
+    }
+  };
+
+  const handleContinue = () => {
+    setModalContent('beginner-start');
+  };
+
+  const handleCloseModal = () => {
+    setShowBeginnerStartModal(false);
+  };
+
   const assessments = [
     {
       level: 'Beginner',
@@ -50,6 +69,61 @@ const SkillAssessment = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" , paddingTop: "44px" }}>
+      {/* Modal */}
+      {showBeginnerStartModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full m-4">
+            {modalContent === 'getting-started' ? (
+              <>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">Getting Started</h2>
+                  <button 
+                    onClick={handleCloseModal}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <button className="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100">
+                    <BookOpen className="text-blue-600 w-4 h-4 mr-2" />
+                    <span className="text-sm">Start Learning</span>
+                  </button>
+                  <button className="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100">
+                    <Trophy className="text-purple-600 w-4 h-4 mr-2" />
+                    <span className="text-sm">Take Challenge</span>
+                  </button>
+                  <button className="flex items-center p-3 bg-green-50 rounded-lg hover:bg-green-100">
+                    <Target className="text-green-600 w-4 h-4 mr-2" />
+                    <span className="text-sm">Set Goals</span>
+                  </button>
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button 
+                    onClick={handleCloseModal}
+                    className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                  >
+                    Close
+                  </button>
+                  <button 
+                    onClick={handleContinue}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </>
+            ) : (
+              <BeginnerStart 
+                onClose={handleCloseModal} 
+                onContinue={() => {/* Add any continue logic */}} 
+              />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Rest of the existing SkillAssessment component remains the same */}
       <div className="max-w-7xl mx-auto p-6">
         <div className="flex">
           {/* Main Content */}
@@ -99,7 +173,12 @@ const SkillAssessment = () => {
                           {assessment.deadline}
                         </div>
                       </div>
-                      <button className="bg-blue-600 text-white px-6 py-2 rounded-lg">Start</button>
+                      <button 
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg"
+                        onClick={() => handleStartClick(index)}
+                      >
+                        Start
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -129,67 +208,10 @@ const SkillAssessment = () => {
             </div>
           </div>
 
-          {/* Right Sidebar */}
-        
           <div className="w-30">
-            {/* Leaderboard */}
             <Leaderboard />
-             
-
-            {/* My Score */}
-            {/* <div className="bg-white rounded-lg shadow p-4 mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <i className="bi bi-globe text-blue-600 text-xl"></i>
-                <span className="text-blue-600 font-semibold text-2xl">742</span>
-              </div>
-              <h3 className="text-lg font-semibold">My Score</h3>
-            </div> */}
             <Score />
-
-            {/* Tests Completed */}
-            {/* <div className="bg-white rounded-lg shadow p-4 mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <i className="bi bi-check2-all text-blue-600 text-xl"></i>
-                <span className="text-blue-600 font-semibold text-2xl">12</span>
-              </div>
-              <h3 className="text-lg font-semibold">Tests Completed</h3>
-            </div> */}
             <TestsCompleted />
-
-            {/* Goals */}
-            {/* <div className="bg-white rounded-lg shadow p-4">
-              <h3 className="text-lg font-semibold mb-4">Goals</h3>
-              <div className="flex justify-center mb-4">
-                <div className="relative w-32 h-32">
-                  <svg className="w-full h-full" viewBox="0 0 36 36">
-                    <path
-                      d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                      fill="none"
-                      stroke="#E5E7EB"
-                      strokeWidth="3"
-                    />
-                    <path
-                      d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                      fill="none"
-                      stroke="#3B82F6"
-                      strokeWidth="3"
-                      strokeDasharray="75, 100"
-                    />
-                  </svg>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <i className="bi bi-rocket text-blue-600 text-2xl"></i>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <p className="text-gray-600 text-sm mb-1">Daily Goal: 7/30 Learning Days</p>
-                <p className="text-gray-600 text-sm">Longest Streak: 21 Days</p>
-              </div>
-            </div> */}
             <Goals />
           </div>
         </div>
