@@ -5,15 +5,19 @@ import Score from './Score';
 import TestsCompleted from './TestsCompleted';
 import Goals from './Goals';
 import BeginnerStart from './BeginnerStart';
+import IntermediateStart from './IntermediateStart';
 
 const SkillAssessment = () => { 
   const [showBeginnerStartModal, setShowBeginnerStartModal] = useState(false);
+  const [showIntermediateStart, setShowIntermediateStart] = useState(false);
   const [modalContent, setModalContent] = useState('getting-started');
 
   const handleStartClick = (index) => {
     if (index === 0) {
       setShowBeginnerStartModal(true);
       setModalContent('getting-started');
+    } else if (index===1) {
+      setShowIntermediateStart(true);
     }
   };
 
