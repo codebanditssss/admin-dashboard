@@ -1,263 +1,327 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, PieChart, Pie, Cell
-} from 'recharts';
-import { FiBriefcase, FiTrendingUp, FiSearch, FiMap } from 'react-icons/fi';
+import React, { useState } from 'react';
+import { Heart } from 'lucide-react';
+
+const JobCard = ({ job }) => {
+  return (
+    <div className="bg-white p-4 rounded shadow">
+      <div className="flex justify-between items-center">
+        <span className="text-xl font-bold">₹{job.salary}/month</span>
+        <span className="text-blue-600 font-semibold">{job.match}% Match</span>
+      </div>
+      <h3 className="text-lg font-bold mt-2">{job.title}</h3>
+      <div className="flex items-center mt-2">
+        <img
+          src="/api/placeholder/20/20"
+          alt={`${job.company} logo`}
+          className="w-5 h-5 mr-2"
+        />
+        <span>{job.company}</span>
+      </div>
+      <div className="flex items-center text-gray-600 text-sm mt-2">
+        <i className="fas fa-map-marker-alt mr-2"></i>
+        <span>{job.location}</span>
+      </div>
+      <div className="flex items-center text-gray-600 text-sm mt-2">
+        <i className="fas fa-calendar-alt mr-2"></i>
+        <span>{job.date}</span>
+      </div>
+      <div className="text-gray-600 text-sm mt-2">
+        {job.applicants} Applicants
+      </div>
+      <div className="flex mt-4">
+        {job.tags.map((tag, index) => (
+          <span key={index} className="px-2 py-1 bg-blue-100 text-blue-700 rounded mr-2">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <button className="w-full mt-4 py-2 bg-blue-600 text-white rounded">
+        Apply Now
+      </button>
+      <button className="w-full mt-2 py-2 border border-gray-300 rounded">
+        <Heart className="mx-auto" />
+      </button>
+    </div>
+  );
+};
 
 const JobMatches = () => {
-  const [filter, setFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const mockData = {
-    matchingTrends: [
-      { month: 'Jan', matches: 45 },
-      { month: 'Feb', matches: 52 },
-      { month: 'Mar', matches: 48 },
-      { month: 'Apr', matches: 70 },
-      { month: 'May', matches: 65 },
-    ],
-    skillDistribution: [
-      { name: 'React', value: 35 },
-      { name: 'Node.js', value: 25 },
-      { name: 'Python', value: 20 },
-      { name: 'AWS', value: 20 },
-    ],
-    locationData: [
-      { city: 'New York', openings: 120 },
-      { city: 'San Francisco', openings: 90 },
-      { city: 'Seattle', openings: 75 },
-      { city: 'Boston', openings: 60 },
-    ]
-  };
+  const [filters, setFilters] = useState({
+    workSchedule: new Set(),
+    salaryRange: 50000,
+    employmentType: new Set(),
+    workStyle: new Set()
+  });
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-  const jobListings = [
+  const jobs = [
     {
-      id: 1,
-      title: "Senior React Developer",
-      company: "TechCorp",
-      location: "New York, NY",
-      matchScore: 95,
-      skills: ["React", "Redux", "TypeScript"],
-      salary: "$120k - $150k",
-      posted: "2 days ago",
-      type: "Full-time",
-      matchLevel: "Excellent"
+      salary: "50000",
+      match: 94,
+      title: "Digital Marketing Researcher",
+      company: "Netflix",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Hybrid"
     },
     {
-      id: 2,
-      title: "Full Stack Engineer",
-      company: "InnoSoft",
-      location: "Remote",
-      matchScore: 88,
-      skills: ["Node.js", "React", "MongoDB"],
-      salary: "$100k - $130k",
-      posted: "1 week ago",
-      type: "Full-time",
-      matchLevel: "Good"
+      salary: "52000",
+      match: 91,
+      title: "Product Analyst",
+      company: "Blinkit",
+      location: "Gurugram, India",
+      date: "17 February",
+      applicants: 82,
+      tags: ["Full-Time", "Remote", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Remote"
+    },
+    {
+      salary: "55000",
+      match: 90,
+      title: "Content Marketing Specialist",
+      company: "Zomato",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Flexible Schedule",
+      workStyle: "Hybrid"
+    },
+    {
+      salary: "55000",
+      match: 87,
+      title: "Influencer Marketing Manager",
+      company: "Netflix",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Hybrid"
+    },
+    {
+      salary: "70000",
+      match: 83,
+      title: "IT Business Analyst",
+      company: "Netflix",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Hybrid"
+    },
+    {
+      salary: "74000",
+      match: 80,
+      title: "Email Marketing Specialist",
+      company: "PhonePe",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Hybrid"
+    },
+    {
+      salary: "75000",
+      match: 80,
+      title: "Supply Chain Analyst",
+      company: "Apple",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Office"
+    },
+    {
+      salary: "59000",
+      match: 79,
+      title: "Business Analyst",
+      company: "Company",
+      location: "Bengaluru, India",
+      date: "12 February",
+      applicants: 196,
+      tags: ["Full-Time", "Hybrid", "Fresher"],
+      workSchedule: "Full-Time",
+      employmentType: "Full Day",
+      workStyle: "Hybrid"
     }
   ];
 
+  const handleFilterChange = (filterType, value) => {
+    setFilters(prevFilters => {
+      const newFilters = { ...prevFilters };
+      if (filterType === 'salaryRange') {
+        newFilters.salaryRange = value;
+      } else {
+        const filterSet = new Set(prevFilters[filterType]);
+        if (filterSet.has(value)) {
+          filterSet.delete(value);
+        } else {
+          filterSet.add(value);
+        }
+        newFilters[filterType] = filterSet;
+      }
+      return newFilters;
+    });
+  };
+
+  const handleResetFilters = () => {
+    setFilters({
+      workSchedule: new Set(),
+      salaryRange: 50000,
+      employmentType: new Set(),
+      workStyle: new Set()
+    });
+  };
+
+  const filteredJobs = jobs.filter(job => {
+    // Check salary range
+    if (parseInt(job.salary) < filters.salaryRange) {
+      return false;
+    }
+
+    // Check work schedule
+    if (filters.workSchedule.size > 0 && !filters.workSchedule.has(job.workSchedule)) {
+      return false;
+    }
+
+    // Check employment type
+    if (filters.employmentType.size > 0 && !filters.employmentType.has(job.employmentType)) {
+      return false;
+    }
+
+    // Check work style
+    if (filters.workStyle.size > 0 && !filters.workStyle.has(job.workStyle)) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
-    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm" , paddingTop: "44px"}}>
-      <div className="max-w-7xl mx-auto p-6">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold mb-2">Job Matches</h1>
-          <p className="text-gray-600">Discover opportunities that match your skills and preferences</p>
+    <div className="bg-gray-100 min-h-screen" style={{ marginLeft: "7.9cm", paddingTop: "44px" }}>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold">Job Matches</h1>
+        <p className="text-gray-600">
+          Discover opportunities that match your skills and preferences
+        </p>
+        
+        <div className="flex space-x-4 mt-4">
+          <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded">
+            Best Matches
+          </button>
+          <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded">
+            Analytics
+          </button>
+          <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded">
+            Job Postings
+          </button>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 text-sm">Total Matches</p>
-                <h3 className="text-2xl font-bold">156</h3>
-              </div>
-              <div className="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <FiBriefcase className="text-blue-600 text-xl" />
-              </div>
-            </div>
+        <div className="flex mt-6" style={{ minHeight: "calc(100vh - 200px)" }}>
+          {/* Filters Section */}
+          <div className="w-1/4 bg-white p-4 rounded shadow h-fit">
+            <h2 className="text-lg font-bold">Filters</h2>
+            <button 
+              className="text-blue-600 text-sm mt-2"
+              onClick={handleResetFilters}
+            >
+              Reset All
+            </button>
+            
+            {/* Work Schedule */}
             <div className="mt-4">
-              <div className="flex items-center">
-                <span className="text-green-500 text-sm">↑ 12%</span>
-                <span className="text-gray-500 text-sm ml-2">vs last month</span>
+              <h3 className="font-semibold">Work Schedule</h3>
+              <div className="mt-2">
+                {["Full-Time", "Part-Time", "Internship", "Project Work", "Volunteering"].map((option) => (
+                  <label key={option} className="block">
+                    <input 
+                      type="checkbox" 
+                      className="mr-2"
+                      checked={filters.workSchedule.has(option)}
+                      onChange={() => handleFilterChange('workSchedule', option)}
+                    />
+                    {option}
+                  </label>
+                ))}
               </div>
             </div>
-          </div>
 
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 text-sm">Match Rate</p>
-                <h3 className="text-2xl font-bold">85%</h3>
-              </div>
-              <div className="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
-                <FiTrendingUp className="text-green-600 text-xl" />
-              </div>
-            </div>
+            {/* Salary Range */}
             <div className="mt-4">
-              <div className="flex items-center">
-                <span className="text-green-500 text-sm">↑ 8%</span>
-                <span className="text-gray-500 text-sm ml-2">improvement</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 text-sm">Applied</p>
-                <h3 className="text-2xl font-bold">24</h3>
-              </div>
-              <div className="h-12 w-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <FiSearch className="text-purple-600 text-xl" />
-              </div>
-            </div>
-            <div className="mt-4">
-              <div className="flex items-center">
-                <span className="text-purple-500 text-sm">↑ 15%</span>
-                <span className="text-gray-500 text-sm ml-2">response rate</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Matching Trends */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h3 className="text-lg font-semibold mb-4">Matching Trends</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={mockData.matchingTrends}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line 
-                  type="monotone" 
-                  dataKey="matches" 
-                  stroke="#0088FE" 
-                  strokeWidth={2}
+              <h3 className="font-semibold">Salary Range</h3>
+              <div className="mt-2">
+                <input
+                  type="range"
+                  min="50000"
+                  max="75000"
+                  className="w-full"
+                  value={filters.salaryRange}
+                  onChange={(e) => handleFilterChange('salaryRange', parseInt(e.target.value))}
                 />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+                <div className="flex justify-between text-sm">
+                  <span>50,000 ₹</span>
+                  <span>75,000 ₹</span>
+                </div>
+              </div>
+            </div>
 
-          {/* Skill Distribution */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h3 className="text-lg font-semibold mb-4">Skills in Demand</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={mockData.skillDistribution}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={100}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label
-                >
-                  {mockData.skillDistribution.map((entry, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+            {/* Employment Type */}
+            <div className="mt-4">
+              <h3 className="font-semibold">Employment Type</h3>
+              <div className="mt-2">
+                {["Full Day", "Flexible Schedule", "Shift Work", "Distant Work"].map((option) => (
+                  <label key={option} className="block">
+                    <input 
+                      type="checkbox" 
+                      className="mr-2"
+                      checked={filters.employmentType.has(option)}
+                      onChange={() => handleFilterChange('employmentType', option)}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            </div>
 
-        {/* Job Listings */}
-        <div className="bg-white rounded-xl shadow p-6 mb-8">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-semibold">Recent Matches</h3>
-            <div className="flex space-x-4">
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <select 
-                className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-              >
-                <option value="all">All Jobs</option>
-                <option value="recent">Recent</option>
-                <option value="highMatch">High Match</option>
-              </select>
+            {/* Work Style */}
+            <div className="mt-4">
+              <h3 className="font-semibold">Work Style</h3>
+              <div className="mt-2">
+                {["Office", "Hybrid", "Remote"].map((option) => (
+                  <label key={option} className="block">
+                    <input 
+                      type="checkbox" 
+                      className="mr-2"
+                      checked={filters.workStyle.has(option)}
+                      onChange={() => handleFilterChange('workStyle', option)}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="space-y-4">
-            {jobListings.map(job => (
-              <div key={job.id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="text-xl font-semibold mb-2">{job.title}</h4>
-                    <p className="text-gray-600 mb-2">{job.company} • {job.location}</p>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {job.skills.map((skill, index) => (
-                        <span 
-                          key={index}
-                          className="px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-sm"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <span>{job.type}</span>
-                      <span>•</span>
-                      <span>{job.salary}</span>
-                      <span>•</span>
-                      <span>{job.posted}</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-lg font-bold mb-1 ${
-                      job.matchScore >= 90 ? 'text-green-600' : 'text-blue-600'
-                    }`}>
-                      {job.matchScore}% Match
-                    </div>
-                    <span className={`text-sm px-2 py-1 rounded-full ${
-                      job.matchLevel === 'Excellent' 
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-blue-100 text-blue-800'
-                    }`}>
-                      {job.matchLevel}
-                    </span>
-                  </div>
-                </div>
-                <button className="mt-4 w-full py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200">
-                  Apply Now
-                </button>
-              </div>
+          {/* Job Cards Grid */}
+          <div className="w-3/4 grid grid-cols-3 gap-4 ml-4 h-fit">
+            {filteredJobs.map((job, index) => (
+              <JobCard key={index} job={job} />
             ))}
           </div>
-        </div>
-
-        {/* Location Analysis */}
-        <div className="bg-white rounded-xl shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">Job Distribution by Location</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={mockData.locationData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="city" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="openings" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </div>
