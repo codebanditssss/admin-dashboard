@@ -1,4 +1,5 @@
 // App.js
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'remixicon/fonts/remixicon.css';
@@ -15,11 +16,19 @@ import JobMatches from './components/JobMatches';
 import MyApplications from './components/MyApplications';
 import Settings from './components/Settings';
 import HelpCenter from './components/HelpCenter';
+import CompleteProfileModal from './components/CompleteProfileModal';
 
 function App() {
+  const [showProfileModal, setShowProfileModal] = useState(false);
+
+  const handleProfileSubmit = (data) => {
+    console.log("Profile data submitted:", data);
+    setShowProfileModal(false);
+  };
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header onOpenCompleteProfile={() => setShowProfileModal(true)} />
       <SideBar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
@@ -30,6 +39,13 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/help" element={<HelpCenter />} />
       </Routes>
+      
+      {/* Complete Profile Modal */}
+      <CompleteProfileModal 
+        isOpen={showProfileModal} 
+        onClose={() => setShowProfileModal(false)}
+        onSubmit={handleProfileSubmit}
+      />
     </BrowserRouter>
   );
 }

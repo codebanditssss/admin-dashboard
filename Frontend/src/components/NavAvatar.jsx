@@ -1,7 +1,7 @@
 import React from 'react';
 import profileImg from '../images/user.jpg';
 
-function NavAvatar() {
+function NavAvatar({ onOpenCompleteProfile }) {
   return (
     <li className="nav-item dropdown pe-3">
       <a
@@ -27,6 +27,22 @@ function NavAvatar() {
           >
             <i className="bi bi-person"></i>
             <span>My Profile</span>
+          </a>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li>
+          <a
+            className="dropdown-item d-flex align-items-center"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onOpenCompleteProfile();
+            }}
+          >
+            <i className="bi bi-person-check"></i>
+            <span>Complete My Profile</span>
           </a>
         </li>
         <li>
